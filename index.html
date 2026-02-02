@@ -4,22 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SEÇMEN ŞAPKA - HOGWARTS AI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Crimson+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* --- TEMEL AYARLAR --- */
+        /* --- TASARIM VE STİLLER (CSS) --- */
         :root {
-            --bg-dark: #1a1a1d;       /* Arka plan: Karanlık */
-            --parchment: #eaddcf;     /* Kutu rengi: Eski parşömen kağıdı */
-            --ink: #3b2f2f;           /* Yazı rengi: Mürekkep */
-            --gold: #c5a059;          /* Detay rengi: Altın */
-            --border-color: #5d4037;  /* Kenarlık: Koyu Kahve */
+            --bg-paper: #fdf5e6;
+            --primary-clay: #4a3b32; /* Daha koyu büyücü rengi */
+            --accent-gold: #d4af37;
+            --text-dark: #2a1b15;
+            --gryffindor: #740001;
+            --slytherin: #1a472a;
+            --ravenclaw: #0e1a40;
+            --hufflepuff: #ecb939;
         }
 
         body {
-            font-family: 'Crimson Text', serif; /* Kitap yazısı tipi */
-            background-color: var(--bg-dark);
-            color: var(--ink);
+            font-family: 'Lato', sans-serif;
+            background-color: var(--bg-paper);
+            color: var(--text-dark);
+            background-image: radial-gradient(#d7ccc8 1px, transparent 1px);
+            background-size: 20px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -30,426 +35,59 @@
         }
 
         .container {
-            background-color: var(--parchment);
+            background-color: #fff8e1;
             padding: 2.5rem;
-            border-radius: 8px;
-            /* Çift çizgili çerçeve - Eski stil */
-            border: 6px double var(--border-color);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7); /* Büyülü parıltı gölgesi */
+            border-radius: 4px;
+            border: 2px solid var(--primary-clay);
+            outline: 6px solid var(--accent-gold); 
+            box-shadow: 0 15px 30px rgba(42, 27, 21, 0.4);
             text-align: center;
             max-width: 650px;
             width: 100%;
             position: relative;
+            display: block;
         }
 
-        /* Köşelerdeki şimşek ikonları */
         .container::before, .container::after {
-            content: '⚡';
+            content: '⚡'; /* Harry Potter ikonu */
             position: absolute;
-            color: var(--gold);
+            color: var(--primary-clay);
             font-size: 24px;
-            text-shadow: 1px 1px 0 #000;
         }
-        .container::before { top: 10px; left: 15px; }
-        .container::after { top: 10px; right: 15px; }
+        .container::before { top: 10px; left: 10px; }
+        .container::after { top: 10px; right: 10px; }
 
         /* --- DİL SEÇİCİ --- */
         .lang-switch-wrapper {
             position: absolute;
             top: 15px;
-            right: 45px;
+            right: 40px;
             display: flex;
             align-items: center;
-            background-color: var(--border-color);
-            border: 1px solid var(--gold);
-            border-radius: 4px;
-            padding: 2px 5px;
+            background-color: var(--text-dark);
+            border: 1px solid var(--accent-gold);
+            border-radius: 6px;
+            padding: 4px;
             z-index: 100;
         }
 
         .lang-opt {
             cursor: pointer;
-            padding: 2px 8px;
+            padding: 4px 10px;
             font-family: 'Cinzel', serif;
             font-weight: bold;
-            font-size: 0.8rem;
-            color: #bbb; /* Pasif renk */
+            font-size: 0.85rem;
+            color: #aaa;
+            transition: all 0.3s ease;
         }
 
         .lang-opt:hover { color: #fff; }
         .lang-opt.active {
-            background-color: var(--gold);
-            color: var(--ink);
-            border-radius: 2px;
+            background-color: var(--accent-gold);
+            color: var(--text-dark);
+            border-radius: 4px;
         }
 
         .lang-divider {
             width: 1px;
-            height: 12px;
-            background-color: #888;
-            margin: 0 2px;
-        }
-
-        /* --- BAŞLIKLAR --- */
-        h1 {
-            font-family: 'Cinzel', serif;
-            margin-bottom: 0.5rem;
-            color: var(--ink);
-            font-size: 2.8rem;
-            text-shadow: 1px 1px 0px var(--gold);
-            border-bottom: 3px solid var(--border-color);
-            display: inline-block;
-            padding-bottom: 10px;
-            margin-top: 10px;
-        }
-        
-        p.subtitle {
-            color: var(--border-color);
-            margin-bottom: 1.5rem;
-            font-style: italic;
-            font-size: 1.3rem;
-            letter-spacing: 1px;
-        }
-
-        /* --- YÖNERGE KUTUSU --- */
-        .instruction-container {
-            background-color: rgba(93, 64, 55, 0.1);
-            border: 1px dashed var(--border-color);
-            border-radius: 6px;
-            padding: 15px;
-            margin-bottom: 25px;
-            text-align: center;
-            font-size: 1.1rem;
-        }
-
-        .civ-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            padding: 0;
-            list-style: none;
-            margin-top: 15px;
-        }
-
-        .civ-tag {
-            background-color: #fff;
-            border: 1px solid var(--gold);
-            padding: 5px 12px;
-            border-radius: 4px; /* Yuvarlaklık azaltıldı, daha keskin */
-            font-size: 0.9rem;
-            font-weight: 700;
-            font-family: 'Cinzel', serif;
-            color: var(--ink);
-        }
-
-        /* Bina Renklerini CSS'de tanımlayalım */
-        .tag-gry { border-bottom: 3px solid #740001; }
-        .tag-sly { border-bottom: 3px solid #1a472a; }
-        .tag-rav { border-bottom: 3px solid #0e1a40; }
-        .tag-huf { border-bottom: 3px solid #ecb939; }
-
-        /* --- BUTONLAR --- */
-        .button-group { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
-
-        .action-btn {
-            background-color: var(--border-color); /* Koyu kahve buton */
-            color: var(--gold);
-            border: 2px solid var(--gold);
-            padding: 12px 24px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 2px;
-            transition: all 0.3s;
-            font-family: 'Cinzel', serif;
-            font-weight: 700;
-            text-transform: uppercase;
-            display: inline-flex; 
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-        }
-        .action-btn:hover { 
-            background-color: var(--gold); 
-            color: var(--border-color);
-            border-color: var(--border-color);
-        }
-        
-        /* --- GÖRSEL ALANI --- */
-        #visual-area {
-            margin-top: 10px;
-            border-radius: 4px;
-            overflow: hidden;
-            border: 4px solid var(--border-color);
-            background: #111;
-            min-height: 320px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        #placeholder-text {
-            color: var(--gold);
-            font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
-            position: absolute;
-            z-index: 10;
-            opacity: 0.8;
-            padding: 0 20px;
-        }
-
-        #uploaded-image { max-width: 100%; max-height: 320px; display: none; z-index: 20; }
-        canvas { z-index: 20; }
-
-        /* --- SONUÇ ALANI --- */
-        #label-container {
-            margin-top: 25px;
-            text-align: left;
-            background: rgba(255, 255, 255, 0.4);
-            padding: 15px;
-            border-radius: 4px;
-            border: 1px solid var(--border-color);
-        }
-
-        .prediction-item { margin-bottom: 12px; font-size: 16px; font-weight: 600; font-family: 'Cinzel', serif; }
-        
-        .progress-bar-bg { 
-            background-color: #d7ccc8; 
-            border-radius: 2px; 
-            height: 16px; 
-            width: 100%; 
-            margin-top: 5px; 
-            overflow: hidden; 
-            border: 1px solid #8d6e63; 
-        }
-        .progress-bar-fill { height: 100%; width: 0%; transition: width 0.5s cubic-bezier(0.4, 0.0, 0.2, 1); }
-
-        #loading-msg { 
-            color: var(--border-color); 
-            font-weight: bold; 
-            font-family: 'Cinzel', serif;
-            display: none; 
-            margin-bottom: 10px; 
-            background: rgba(212, 175, 55, 0.3); 
-            padding: 8px; 
-            border-radius: 4px; 
-        }
-
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <div class="lang-switch-wrapper">
-            <div class="lang-opt active" id="btn-tr" onclick="setLanguage('tr')">TR</div>
-            <div class="lang-divider"></div>
-            <div class="lang-opt" id="btn-en" onclick="setLanguage('en')">EN</div>
-        </div>
-
-        <h1 id="main-title">HOGWARTS AI</h1>
-        <p class="subtitle" id="subtitle-text">Seçmen Şapka Karar Veriyor...</p>
-        
-        <div class="instruction-container">
-            <div class="instruction-text" id="instr-text">
-                Kişiyi veya nesneyi analiz etmek için fotoğraf çekin veya yükleyin.<br>Yapay zeka hangi binaya ait olduğunu söylesin.
-            </div>
-            
-            <div class="civ-list">
-                <span class="civ-tag tag-gry">🦁 Gryffindor</span>
-                <span class="civ-tag tag-sly">🐍 Slytherin</span>
-                <span class="civ-tag tag-rav">🦅 Ravenclaw</span>
-                <span class="civ-tag tag-huf">🦡 Hufflepuff</span>
-            </div>
-        </div>
-        
-        <div id="loading-msg">🎩 Şapka düşünüyor, bekleyin...</div>
-
-        <div class="button-group">
-            <button class="action-btn" onclick="init()">
-                <span id="btn-cam-text">📷 Kamera</span>
-            </button>
-            <label for="imageUpload" class="action-btn">
-                <span id="btn-upload-text">📂 Yükle</span>
-            </label>
-            <input type="file" id="imageUpload" accept="image/*" onchange="handleImageUpload(event)" style="display: none;">
-        </div>
-
-        <div id="visual-area">
-            <div id="placeholder-text">🔍 Analiz için görsel bekleniyor.</div>
-            <img id="uploaded-image" src="#" alt="Yüklenen Görsel" />
-        </div>
-
-        <div id="label-container"></div>
-
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
-    
-    <script type="text/javascript">
-        // --- AYARLAR ---
-        let currentLang = 'tr';
-        
-        // DİKKAT: Model linkiniz buraya
-        const TM_MODEL_URL = "https://teachablemachine.withgoogle.com/models/Y2HlQGqEh/"; 
-
-        const translations = {
-            'tr': {
-                'main-title': 'HOGWARTS AI',
-                'subtitle-text': 'Seçmen Şapka Karar Veriyor...',
-                'instr-text': 'Kişiyi veya nesneyi analiz etmek için fotoğraf çekin veya yükleyin.<br>Yapay zeka hangi binaya ait olduğunu söylesin.',
-                'btn-cam-text': '📷 Kamera',
-                'btn-upload-text': '📂 Yükle',
-                'placeholder-text': '🔍 Analiz için görsel bekleniyor.',
-                'loading-msg': '🎩 Şapka düşünüyor, bekleyin...'
-            },
-            'en': {
-                'main-title': 'HOGWARTS AI',
-                'subtitle-text': 'The Sorting Hat Decides...',
-                'instr-text': 'Take a photo or upload to analyze the person or object.<br>AI will reveal the House.',
-                'btn-cam-text': '📷 Camera',
-                'btn-upload-text': '📂 Upload',
-                'placeholder-text': '🔍 Waiting for image.',
-                'loading-msg': '🎩 The Hat is thinking...'
-            }
-        };
-
-        function setLanguage(lang) {
-            currentLang = lang;
-            document.documentElement.lang = currentLang;
-
-            if(lang === 'tr') {
-                document.getElementById('btn-tr').classList.add('active');
-                document.getElementById('btn-en').classList.remove('active');
-            } else {
-                document.getElementById('btn-en').classList.add('active');
-                document.getElementById('btn-tr').classList.remove('active');
-            }
-
-            const t = translations[currentLang];
-            for (const [id, text] of Object.entries(t)) {
-                const el = document.getElementById(id);
-                if (el) el.innerHTML = text;
-            }
-        }
-
-        // --- MODEL ---
-        let model, webcam, labelContainer, maxPredictions;
-        let isModelLoading = false;
-
-        async function loadModel() {
-            if (model || isModelLoading) return;
-            isModelLoading = true;
-            document.getElementById("loading-msg").style.display = "block";
-            try {
-                const modelURL = TM_MODEL_URL + "model.json";
-                const metadataURL = TM_MODEL_URL + "metadata.json";
-                model = await tmImage.load(modelURL, metadataURL);
-                maxPredictions = model.getTotalClasses();
-                labelContainer = document.getElementById("label-container");
-                labelContainer.innerHTML = "";
-                for (let i = 0; i < maxPredictions; i++) {
-                    let div = document.createElement("div");
-                    div.className = "prediction-item";
-                    div.innerHTML = `
-                        <div style="display:flex; justify-content:space-between;">
-                            <span id="label-name-${i}">Bina ${i}</span>
-                            <span id="label-prob-${i}">%0</span>
-                        </div>
-                        <div class="progress-bar-bg">
-                            <div id="progress-${i}" class="progress-bar-fill"></div>
-                        </div>
-                    `;
-                    labelContainer.appendChild(div);
-                }
-            } catch (error) { 
-                alert("Model yüklenirken hata oluştu. Lütfen linki kontrol edin."); 
-            }
-            isModelLoading = false;
-            document.getElementById("loading-msg").style.display = "none";
-        }
-
-        async function init() {
-            await loadModel();
-            document.getElementById("placeholder-text").style.display = "none";
-            document.getElementById("uploaded-image").style.display = "none";
-            const container = document.getElementById("visual-area");
-            const oldCanvas = container.querySelector("canvas");
-            if(oldCanvas) oldCanvas.remove();
-            
-            const flip = true; 
-            webcam = new tmImage.Webcam(300, 300, flip);
-            await webcam.setup(); 
-            await webcam.play();
-            window.requestAnimationFrame(loop);
-            container.appendChild(webcam.canvas);
-        }
-
-        async function loop() { 
-            webcam.update(); 
-            await predict(); 
-            window.requestAnimationFrame(loop); 
-        }
-
-        async function handleImageUpload(event) {
-            await loadModel();
-            if(webcam) { 
-                await webcam.stop(); 
-                webcam = null; 
-                const container = document.getElementById("visual-area"); 
-                const canvas = container.querySelector("canvas"); 
-                if(canvas) canvas.remove(); 
-            }
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById("placeholder-text").style.display = "none";
-                    const imgElement = document.getElementById("uploaded-image");
-                    imgElement.src = e.target.result;
-                    imgElement.style.display = "block";
-                    imgElement.onload = async function() { await predictImage(imgElement); }
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
-        async function predict() { 
-            if(webcam && webcam.canvas) { 
-                const prediction = await model.predict(webcam.canvas); 
-                updateBars(prediction); 
-            } 
-        }
-        
-        async function predictImage(imageElement) { 
-            const prediction = await model.predict(imageElement); 
-            updateBars(prediction); 
-        }
-
-        function updateBars(prediction) {
-            for (let i = 0; i < maxPredictions; i++) {
-                const nameSpan = document.getElementById(`label-name-${i}`);
-                const probSpan = document.getElementById(`label-prob-${i}`);
-                const progressBar = document.getElementById(`progress-${i}`);
-                
-                let className = prediction[i].className;
-                const probability = prediction[i].probability.toFixed(2);
-                const percent = Math.round(probability * 100) + "%";
-                
-                nameSpan.innerHTML = className;
-                probSpan.innerHTML = percent;
-                progressBar.style.width = percent;
-
-                // Bina renklerine göre çubuk rengi
-                const lowerClass = className.toLowerCase();
-                if(lowerClass.includes('gryffindor')) progressBar.style.background = "#740001";
-                else if(lowerClass.includes('slytherin')) progressBar.style.background = "#1a472a";
-                else if(lowerClass.includes('ravenclaw')) progressBar.style.background = "#0e1a40";
-                else if(lowerClass.includes('hufflepuff')) progressBar.style.background = "#ecb939";
-                else progressBar.style.background = "#d4af37"; // Varsayılan altın
-            }
-        }
-    </script>
-</body>
-</html>
+            height:
