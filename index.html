@@ -4,27 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SEÇMEN ŞAPKA - HOGWARTS AI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=IM+Fell+English+SC&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* --- TASARIM VE STİLLER (CSS) --- */
+        /* --- KARANLIK BÜYÜ TASARIMI (CSS) --- */
         :root {
-            --bg-paper: #fdf5e6;
-            --primary-clay: #4a3b32; /* Daha koyu büyücü rengi */
-            --accent-gold: #d4af37;
-            --text-dark: #2a1b15;
-            --gryffindor: #740001;
-            --slytherin: #1a472a;
-            --ravenclaw: #0e1a40;
-            --hufflepuff: #ecb939;
+            /* Koyu Tema Renkleri */
+            --bg-dark: #0b0c10;     /* Çok koyu gece mavisi/siyah */
+            --card-bg: #1f2833;     /* Koyu gri/mavi taş rengi */
+            --text-lumos: #c5c6c7;  /* Gümüşi beyaz metin */
+            --wizard-gold: #d4af37; /* Parlak altın */
+            --gold-glow: rgba(212, 175, 55, 0.4); 
+            
+            /* Bina Renkleri (Değişmez) */
+            --gryffindor-red: #740001;
+            --slytherin-green: #2a623d;
+            --ravenclaw-blue: #222f5b;
+            --hufflepuff-yellow: #ecb939;
         }
 
         body {
             font-family: 'Lato', sans-serif;
-            background-color: var(--bg-paper);
-            color: var(--text-dark);
-            background-image: radial-gradient(#d7ccc8 1px, transparent 1px);
-            background-size: 20px 20px;
+            background-color: var(--bg-dark);
+            color: var(--text-lumos);
+            /* Yıldızlı/Büyülü gece dokusu */
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
+                radial-gradient(rgba(255,255,255,.1) 2px, transparent 3px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -35,205 +44,271 @@
         }
 
         .container {
-            background-color: #fff8e1;
+            background-color: var(--card-bg);
             padding: 2.5rem;
-            border-radius: 4px;
-            border: 2px solid var(--primary-clay);
-            outline: 6px solid var(--accent-gold); 
-            box-shadow: 0 15px 30px rgba(42, 27, 21, 0.4);
+            border-radius: 12px;
+            /* Altın çerçeveli karanlık kutu */
+            border: 1px solid #45a29e;
+            outline: 3px solid var(--wizard-gold);
+            outline-offset: -10px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.9), inset 0 0 50px rgba(0,0,0,0.8);
             text-align: center;
-            max-width: 650px;
+            max-width: 600px;
             width: 100%;
             position: relative;
-            display: block;
         }
 
+        /* Köşe Süsleri */
         .container::before, .container::after {
-            content: '⚡'; /* Harry Potter ikonu */
+            content: '⚜';
             position: absolute;
-            color: var(--primary-clay);
+            color: var(--wizard-gold);
             font-size: 24px;
+            top: 15px;
+            text-shadow: 0 0 10px var(--gold-glow);
         }
-        .container::before { top: 10px; left: 10px; }
-        .container::after { top: 10px; right: 10px; }
+        .container::before { left: 20px; }
+        .container::after { right: 20px; }
 
         /* --- DİL SEÇİCİ --- */
         .lang-switch-wrapper {
             position: absolute;
-            top: 15px;
-            right: 40px;
+            top: -45px;
+            right: 10px;
             display: flex;
             align-items: center;
-            background-color: var(--text-dark);
-            border: 1px solid var(--accent-gold);
-            border-radius: 6px;
-            padding: 4px;
-            z-index: 100;
+            background-color: #000;
+            border: 1px solid var(--wizard-gold);
+            border-radius: 4px;
+            padding: 5px 10px;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
         }
 
         .lang-opt {
             cursor: pointer;
-            padding: 4px 10px;
+            padding: 2px 8px;
             font-family: 'Cinzel', serif;
             font-weight: bold;
-            font-size: 0.85rem;
-            color: #aaa;
+            font-size: 0.8rem;
+            color: #666;
             transition: all 0.3s ease;
         }
 
-        .lang-opt:hover { color: #fff; }
+        .lang-opt:hover { color: var(--wizard-gold); }
         .lang-opt.active {
-            background-color: var(--accent-gold);
-            color: var(--text-dark);
-            border-radius: 4px;
+            color: #fff;
+            text-shadow: 0 0 5px var(--wizard-gold);
         }
 
         .lang-divider {
             width: 1px;
-            height: 15px;
-            background-color: #555;
-            margin: 0 2px;
+            height: 12px;
+            background-color: #444;
+            margin: 0 8px;
         }
 
-        /* BAŞLIK */
+        /* BAŞLIKLAR */
         h1 {
             font-family: 'Cinzel', serif;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
+            font-weight: 900;
+            margin: 10px 0 5px 0;
+            color: var(--wizard-gold);
             font-size: 2.5rem;
-            text-shadow: 2px 2px 0px var(--accent-gold);
-            letter-spacing: 2px;
-            margin-top: 20px;
-            border-bottom: 2px solid var(--primary-clay);
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            letter-spacing: 4px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
             display: inline-block;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
         }
         
         p.subtitle {
-            color: #5d4037;
+            font-family: 'IM Fell English SC', serif;
+            color: #66fcf1; /* Mistik mavi */
+            opacity: 0.7;
             margin-bottom: 1.5rem;
-            font-style: italic;
             font-size: 1.1rem;
+            letter-spacing: 2px;
         }
 
         /* YÖNERGE KUTUSU */
         .instruction-container {
-            background-color: rgba(74, 59, 50, 0.08);
-            border: 1px dashed var(--primary-clay);
-            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 1px dashed var(--wizard-gold);
+            border-radius: 6px;
             padding: 15px;
             margin-bottom: 25px;
             text-align: center;
+        }
+
+        .instruction-text {
+            font-style: italic;
+            font-size: 1rem;
+            color: #cfd8dc;
         }
 
         .civ-list {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             padding: 0;
             list-style: none;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .civ-tag {
-            background-color: #fff;
-            border: 1px solid var(--accent-gold);
+            background-color: #121212;
+            border: 1px solid #444;
             padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.9rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
             font-weight: 700;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
             font-family: 'Cinzel', serif;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
+        .civ-tag:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
 
-        /* Bina Renkleri */
-        .tag-gry { color: var(--gryffindor); border-color: var(--gryffindor); }
-        .tag-sly { color: var(--slytherin); border-color: var(--slytherin); }
-        .tag-rav { color: var(--ravenclaw); border-color: var(--ravenclaw); }
-        .tag-huf { color: #bfa12f; border-color: #bfa12f; }
+        /* Bina Tag Renkleri (Karanlık modda parlasın) */
+        .tag-gry { color: #ff4d4d; border-color: #740001; text-shadow: 0 0 5px #740001; }
+        .tag-sly { color: #00ff6a; border-color: #1a472a; text-shadow: 0 0 5px #1a472a; }
+        .tag-rav { color: #4da6ff; border-color: #0e1a40; text-shadow: 0 0 5px #0e1a40; }
+        .tag-huf { color: #ffe066; border-color: #ecb939; text-shadow: 0 0 5px #ecb939; }
 
-        .button-group { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
+        /* BUTONLAR */
+        .button-group { display: flex; justify-content: center; gap: 20px; margin-bottom: 25px; }
 
         .action-btn {
-            background-color: var(--text-dark);
-            color: var(--accent-gold);
-            border: 2px solid var(--accent-gold);
-            padding: 12px 24px;
-            font-size: 16px;
+            background-color: #0b0c10;
+            color: var(--wizard-gold);
+            border: 1px solid var(--wizard-gold);
+            padding: 12px 25px;
+            font-size: 15px;
             cursor: pointer;
             border-radius: 2px;
             transition: all 0.3s;
             font-family: 'Cinzel', serif;
             font-weight: 700;
             text-transform: uppercase;
-            box-shadow: 0 4px 0 #1a100d;
+            letter-spacing: 2px;
             display: inline-flex; 
             align-items: center;
             gap: 10px;
             text-decoration: none;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
         }
-        .action-btn:hover { background-color: var(--primary-clay); transform: translateY(2px); box-shadow: 0 2px 0 #1a100d; }
-        
+
+        .action-btn:hover {
+            background-color: var(--wizard-gold);
+            color: #000;
+            box-shadow: 0 0 20px var(--gold-glow);
+            transform: scale(1.05);
+        }
+
+        /* GÖRSEL ALAN (Düşünseli / Pensieve Görünümü) */
         #visual-area {
-            margin-top: 10px;
-            border-radius: 4px;
+            margin: 10px auto;
+            border-radius: 50% 50% 4px 4px; /* Hafif kavisli üst */
             overflow: hidden;
-            border: 4px solid var(--text-dark);
-            background: #111;
-            min-height: 320px;
+            border: 2px solid #444;
+            background: #000;
+            height: 320px;
+            width: 320px;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+            box-shadow: inset 0 0 40px rgba(0,0,0,1), 0 0 15px rgba(0,0,0,0.5);
+        }
+        
+        /* Işıltılı kenarlık */
+        #visual-area::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: inherit;
+            box-shadow: inset 0 0 20px rgba(100, 255, 218, 0.1); /* Hafif mistik ışıltı */
+            pointer-events: none;
         }
 
         #placeholder-text {
-            color: var(--accent-gold);
+            color: #66fcf1;
             font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
+            font-size: 1rem;
             position: absolute;
             z-index: 10;
-            opacity: 0.8;
+            opacity: 0.6;
+            text-align: center;
             padding: 0 20px;
+            letter-spacing: 1px;
+            animation: ghostFloat 3s infinite ease-in-out;
         }
 
-        #uploaded-image { max-width: 100%; max-height: 320px; display: none; z-index: 20; border: 2px solid #fff; }
+        @keyframes ghostFloat {
+            0%, 100% { transform: translateY(0); opacity: 0.6; }
+            50% { transform: translateY(-5px); opacity: 0.9; text-shadow: 0 0 8px #66fcf1; }
+        }
+
+        #uploaded-image { max-width: 100%; max-height: 100%; display: none; z-index: 20; }
         canvas { z-index: 20; }
 
+        /* SONUÇ ALANI */
         #label-container {
             margin-top: 25px;
             text-align: left;
-            background: rgba(255, 255, 255, 0.5);
-            padding: 15px;
+            background: rgba(0, 0, 0, 0.5); /* Yarı saydam siyah */
+            padding: 20px;
             border-radius: 8px;
-            border: 1px dashed var(--primary-clay);
+            border-left: 4px solid var(--wizard-gold);
+            position: relative;
+        }
+        
+        .prediction-item { margin-bottom: 15px; font-size: 15px; font-weight: 700; font-family: 'Cinzel', serif; color: #e0e0e0; letter-spacing: 1px; }
+        
+        .progress-bar-bg { 
+            background-color: #2c3e50; /* Koyu gri zemin */
+            border-radius: 2px; 
+            height: 12px; 
+            width: 100%; 
+            margin-top: 8px; 
+            overflow: hidden; 
+            border: 1px solid #444;
+        }
+        
+        .progress-bar-fill { 
+            height: 100%; 
+            width: 0%; 
+            transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1); 
+            box-shadow: 0 0 10px rgba(255,255,255,0.3); /* Bar ışıltısı */
         }
 
-        .prediction-item { margin-bottom: 12px; font-size: 15px; font-weight: 600; font-family: 'Cinzel', serif; }
-        .progress-bar-bg { background-color: #d7ccc8; border-radius: 4px; height: 14px; width: 100%; margin-top: 5px; overflow: hidden; border: 1px solid #a1887f; }
-        .progress-bar-fill { height: 100%; width: 0%; transition: width 0.5s cubic-bezier(0.4, 0.0, 0.2, 1); }
-
-        #loading-msg { color: var(--primary-clay); font-weight: bold; display: none; margin-bottom: 10px; background: rgba(212, 175, 55, 0.2); padding: 5px; border-radius: 4px; }
+        #loading-msg { 
+            color: #ffcc00; 
+            font-family: 'Cinzel', serif;
+            font-weight: bold; 
+            display: none; 
+            margin-bottom: 15px; 
+            font-size: 1rem;
+            text-shadow: 0 0 5px #ffcc00;
+        }
 
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="lang-switch-wrapper">
-            <div class="lang-opt active" id="btn-tr" onclick="setLanguage('tr')">TR</div>
-            <div class="lang-divider"></div>
-            <div class="lang-opt" id="btn-en" onclick="setLanguage('en')">EN</div>
-        </div>
+    <div class="lang-switch-wrapper">
+        <div class="lang-opt active" id="btn-tr" onclick="setLanguage('tr')">TR</div>
+        <div class="lang-divider"></div>
+        <div class="lang-opt" id="btn-en" onclick="setLanguage('en')">EN</div>
+    </div>
 
+    <div class="container">
+        
         <h1 id="main-title">HOGWARTS AI</h1>
         <p class="subtitle" id="subtitle-text">Seçmen Şapka Karar Veriyor...</p>
         
         <div class="instruction-container">
             <div class="instruction-text" id="instr-text">
-                Kişiyi veya nesneyi analiz etmek için fotoğraf çekin veya yükleyin.<br>Yapay zeka hangi binaya ait olduğunu söylesin.
+                Kişiyi analiz etmek için fotoğraf çekin veya yükleyin.<br>Karanlıkta bile olsa, Şapka gerçeği görür.
             </div>
             
             <div class="civ-list">
@@ -244,20 +319,20 @@
             </div>
         </div>
         
-        <div id="loading-msg">🎩 Şapka düşünüyor, bekleyin...</div>
+        <div id="loading-msg">🌙 Zihinbende Yapılıyor... Bekleyin. 🌙</div>
 
         <div class="button-group">
             <button class="action-btn" onclick="init()">
                 <span id="btn-cam-text">📷 Kamera</span>
             </button>
             <label for="imageUpload" class="action-btn">
-                <span id="btn-upload-text">📂 Yükle</span>
+                <span id="btn-upload-text">📜 Yükle</span>
             </label>
             <input type="file" id="imageUpload" accept="image/*" onchange="handleImageUpload(event)" style="display: none;">
         </div>
 
         <div id="visual-area">
-            <div id="placeholder-text">🔍 Analiz için görsel bekleniyor.</div>
+            <div id="placeholder-text">🔮 Kehanet Bekleniyor</div>
             <img id="uploaded-image" src="#" alt="Yüklenen Görsel" />
         </div>
 
@@ -272,27 +347,27 @@
         // --- AYARLAR ---
         let currentLang = 'tr';
         
-        // SENİN YENİ MODEL LİNKİN BURAYA EKLENDİ:
+        // SENİN MODEL LİNKİN:
         const TM_MODEL_URL = "https://teachablemachine.withgoogle.com/models/F01oBKYf8/"; 
 
         const translations = {
             'tr': {
                 'main-title': 'HOGWARTS AI',
                 'subtitle-text': 'Seçmen Şapka Karar Veriyor...',
-                'instr-text': 'Kişiyi veya nesneyi analiz etmek için fotoğraf çekin veya yükleyin.<br>Yapay zeka hangi binaya ait olduğunu söylesin.',
+                'instr-text': 'Kişiyi analiz etmek için fotoğraf çekin veya yükleyin.<br>Karanlıkta bile olsa, Şapka gerçeği görür.',
                 'btn-cam-text': '📷 Kamera',
-                'btn-upload-text': '📂 Yükle',
-                'placeholder-text': '🔍 Analiz için görsel bekleniyor.',
-                'loading-msg': '🎩 Şapka düşünüyor, bekleyin...'
+                'btn-upload-text': '📜 Yükle',
+                'placeholder-text': '🔮 Kehanet Bekleniyor',
+                'loading-msg': '🌙 Zihinbende Yapılıyor... Bekleyin. 🌙'
             },
             'en': {
                 'main-title': 'HOGWARTS AI',
                 'subtitle-text': 'The Sorting Hat Decides...',
-                'instr-text': 'Take a photo or upload to analyze the person or object.<br>AI will reveal the House.',
+                'instr-text': 'Take a photo or upload to analyze.<br>Even in darkness, the Hat sees the truth.',
                 'btn-cam-text': '📷 Camera',
-                'btn-upload-text': '📂 Upload',
-                'placeholder-text': '🔍 Waiting for image.',
-                'loading-msg': '🎩 The Hat is thinking...'
+                'btn-upload-text': '📜 Upload',
+                'placeholder-text': '🔮 Awaiting Prophecy',
+                'loading-msg': '🌙 Legilimency in progress... Wait. 🌙'
             }
         };
 
@@ -345,7 +420,7 @@
                     labelContainer.appendChild(div);
                 }
             } catch (error) { 
-                alert("Model yüklenirken hata oluştu. Lütfen linki kontrol edin."); 
+                alert("Karanlık güçler bağlantıyı engelledi (Model hatası)."); 
             }
             isModelLoading = false;
             document.getElementById("loading-msg").style.display = "none";
@@ -360,7 +435,7 @@
             if(oldCanvas) oldCanvas.remove();
             
             const flip = true; 
-            webcam = new tmImage.Webcam(300, 300, flip);
+            webcam = new tmImage.Webcam(320, 320, flip);
             await webcam.setup(); 
             await webcam.play();
             window.requestAnimationFrame(loop);
@@ -422,13 +497,28 @@
                 probSpan.innerHTML = percent;
                 progressBar.style.width = percent;
 
-                // Bina renklerine göre çubuk rengini değiştir
+                // --- KARANLIK TEMA BİNA RENKLERİ ---
                 const lowerClass = className.toLowerCase();
-                if(lowerClass.includes('gryffindor')) progressBar.style.background = "#740001";
-                else if(lowerClass.includes('slytherin')) progressBar.style.background = "#1a472a";
-                else if(lowerClass.includes('ravenclaw')) progressBar.style.background = "#0e1a40";
-                else if(lowerClass.includes('hufflepuff')) progressBar.style.background = "#ecb939";
-                else progressBar.style.background = "#d4af37"; // Varsayılan altın rengi
+                
+                // Gryffindor: Ateş Kırmızısı
+                if(lowerClass.includes('gryffindor')) {
+                    progressBar.style.background = "linear-gradient(90deg, #500000 0%, #ae0001 100%)";
+                }
+                // Slytherin: Zehir Yeşili
+                else if(lowerClass.includes('slytherin')) {
+                    progressBar.style.background = "linear-gradient(90deg, #1a472a 0%, #2ecc71 100%)";
+                }
+                // Ravenclaw: Derin Gece Mavisi
+                else if(lowerClass.includes('ravenclaw')) {
+                    progressBar.style.background = "linear-gradient(90deg, #0e1a40 0%, #22a6b3 100%)";
+                }
+                // Hufflepuff: Parlak Kanarya
+                else if(lowerClass.includes('hufflepuff')) {
+                    progressBar.style.background = "linear-gradient(90deg, #f0932b 0%, #f1c40f 100%)";
+                }
+                else {
+                    progressBar.style.background = "#d4af37"; 
+                }
             }
         }
     </script>
